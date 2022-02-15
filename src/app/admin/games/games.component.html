@@ -1,0 +1,14 @@
+<div class="container">
+  <div
+    *ngFor="let game of gamesData"
+    class="game-card">
+    <div class="game-header">
+      <h2>{{game.title}}</h2>
+      <p>{{game.price}} UAH</p>
+    </div>
+    <div class="game-info">
+      <p>{{game.description}}</p>
+      <button>Add To Library</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,103 @@
+.container {
+  margin: 0 auto;
+  width: 800px;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.search-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-control {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.nickname {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-control input {
+  width: 300px;
+}
+
+.form-control button {
+  padding: 8px 16px;
+  background-color: darkgreen;
+  border: none;
+  color: white;
+  font-size: 16px;
+}
+
+.form-control button:active {
+  background-color: #00a800;
+}
+
+.form-control button:disabled {
+  background-color: grey;
+}
+
+input {
+  outline: none;
+  height: 30px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+.friends {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.friends-heading {
+  font-size: 24px;
+}
+
+.friends-list {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.friend-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  border: 1px dashed green;
+  padding: 5px;
+}
+
+.friend-item p {
+  font-size: 20px;
+}
+
+.btn-item {
+  display: flex;
+}
+
+.btn-item button {
+  margin-left: 10px;
+  padding: 4px 8px;
+  background-color: coral;
+  color: white;
+  border: none;
+}
