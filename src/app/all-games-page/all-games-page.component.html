@@ -1,11 +1,18 @@
-<div class="game">
+<div
+  *ngIf="game; else loading"
+  class="game"
+>
   <div class="game-header">
-    <h1>Title</h1>
+    <h1>{{game.title}}</h1>
     <button
       routerLink="/"
     >Home</button>
   </div>
   <div class="game-info">
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, cum distinctio ipsa ipsam ipsum magnam maxime modi nihil odit rerum sequi sunt vel! Cumque distinctio maxime nulla quaerat sequi velit.</p>
+    <p>{{game.description}}</p>
   </div>
 </div>
+
+<ng-template #loading>
+  <p>loading...</p>
+</ng-template>

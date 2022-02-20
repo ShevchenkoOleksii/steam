@@ -1,0 +1,28 @@
+<div>
+  <input type="range" id="price" name="price"
+         min="0" max="2000" step="100"
+         [(ngModel)]="price.value"
+         (input)="increase(price.value)"
+  >
+  <label for="price">Price</label>
+</div>
+
+<div>
+  <input type="checkbox" id="music" name="interest" value="music"
+         [(ngModel)]="price.music"
+         (change)="info(price.music)"
+  >
+<!--  (change)="increase(price)"-->
+  <label for="music">Music</label>
+
+<!--  <input type="radio" id="music2" name="interest" value="music2"-->
+<!--  >-->
+  <!--  (change)="increase(price)"-->
+<!--  <label for="music2">Music2</label>-->
+</div>
+
+
+<p>{{price.value}}</p>
+<button (click)="showPrice()">Show Current Price</button>
+<button (click)="increase(price.value)">price</button>
+<button (click)="info(price.music)">music</button>

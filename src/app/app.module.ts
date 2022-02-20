@@ -10,6 +10,7 @@ import { GameCardComponent } from './shared/components/game-card/game-card.compo
 import {SharedModule} from "./shared/shared.module";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {AuthInterceptor} from "./shared/auth.interseptor";
+import {FilterByPricePipe} from "./admin/shared/pipes/filter-by-price.pipe";
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,

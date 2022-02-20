@@ -37,3 +37,8 @@ button {
 button:active {
   background-color: #bd00bd;
 }
+
+button:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}

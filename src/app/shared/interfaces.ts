@@ -22,5 +22,8 @@ export interface GameCard {
   title: string
   description: string
   price: number
-  id: number
+  id?: string | any,
+  added: boolean,
+  gameId?: number,
+  music?: boolean
 }

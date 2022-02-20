@@ -13,6 +13,9 @@ import {HttpClient} from "@angular/common/http";
 import {SharedModule} from "../shared/shared.module";
 import {AuthGuard} from "./shared/services/auth.guard";
 import {SearchFriendsPipe} from "./shared/pipes/search-friends.pipe";
+import { FilterBoxComponent } from './games/filter-box/filter-box.component';
+import {FilterByPricePipe} from "./shared/pipes/filter-by-price.pipe";
+import {FilterByTagPipe} from "./shared/pipes/filter-by-tag.pipe";
 
 @NgModule({
   imports: [
@@ -68,7 +71,10 @@ import {SearchFriendsPipe} from "./shared/pipes/search-friends.pipe";
     LibraryComponent,
     FriendsComponent,
     ProfileComponent,
-    SearchFriendsPipe
+    SearchFriendsPipe,
+    FilterBoxComponent,
+    FilterByPricePipe,
+    FilterByTagPipe
   ],
   providers: [
     AuthGuard

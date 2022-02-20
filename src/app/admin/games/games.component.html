@@ -1,6 +1,10 @@
 <div class="container">
+  <app-filter-box
+    (onChanged)="onChanged($event)"
+    (onChecked)="onChecked($event)"
+  ></app-filter-box>
   <div
-    *ngFor="let game of gamesData"
+    *ngFor="let game of gamesData | filterByPrice: currentPriceFilter.price | filterByTag: currentPriceFilter.music"
     class="game-card">
     <div class="game-header">
       <h2>{{game.title}}</h2>
@@ -8,7 +12,8 @@
     </div>
     <div class="game-info">
       <p>{{game.description}}</p>
-      <button>Add To Library</button>
+      <button type="submit" (click)="addGame(game)" [disabled]="game.added">Add To Library</button>
+      <button type="submit" (click)="remove(game.id)">Delete</button>
     </div>
   </div>
 </div>
