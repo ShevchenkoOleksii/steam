@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {GameCard} from "../../shared/interfaces";
-import {GameService} from "../../shared/components/game.service";
+import {GameService} from "../../shared/game.service";
 import {FilterBoxComponent} from "./filter-box/filter-box.component";
 
 @Component({
@@ -100,12 +100,17 @@ export class GamesComponent implements OnInit {
   //   // }
   // ]
   gamesData: GameCard[] = []
-  libraryGames: GameCard[] = [...this.gamesData]
+  // libraryGames: GameCard[] = [...this.gamesData]
 
   currentPriceFilter = {
     price: 2000,
-    music: false
+    music: false,
+    indie: true,
+    adventure: true,
+    action: true
   }
+
+  searchGames = ''
 
   constructor(
     private gameService: GameService,
@@ -141,11 +146,15 @@ export class GamesComponent implements OnInit {
     })
   }
 
-  remove(id: string) {
-    this.gameService.removeGame(id).subscribe(() => {
-      this.libraryGames = this.libraryGames.filter((game) => game.id !== id)
-      console.log(this.libraryGames)
-    })
+  // remove(id: string) {
+  //   this.gameService.removeGame(id).subscribe(() => {
+  //     this.libraryGames = this.libraryGames.filter((game) => game.id !== id)
+  //     console.log(this.libraryGames)
+  //   })
+  // }
+
+  getPrice() {
+    return this.currentPriceFilter
   }
 
   onChanged(price: number) {
@@ -153,8 +162,26 @@ export class GamesComponent implements OnInit {
     this.currentPriceFilter.price = price
   }
 
-  onChecked(music: boolean) {
-    this.currentPriceFilter.music = music
+  onChecked(price: any) {
+    // this.currentPriceFilter.indie = price.indie
+    // this.currentPriceFilter.action = price.action
+    // this.currentPriceFilter.adventure = price.adventure
+    // console.log(this.currentPriceFilter)
+  }
+
+  onCheckedIndie(indie: any) {
+    this.currentPriceFilter.indie = indie
+    // console.log(this.currentPriceFilter)
+  }
+
+  onCheckedAction(action: any) {
+    this.currentPriceFilter.action = action
+    // console.log(this.currentPriceFilter)
+  }
+
+  onCheckedAdventure(adventure: any) {
+    this.currentPriceFilter.adventure = adventure
+    // console.log(this.currentPriceFilter)
   }
 
 //   onChecked(obj: any) {

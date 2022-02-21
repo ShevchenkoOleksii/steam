@@ -1,0 +1,16 @@
+.container {
+  height: 100%;
+  margin: 20vh auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  background-color: white;
+  width: 300px;
+  height: 400px;
+  border: 1px solid purple;
+}
+
+

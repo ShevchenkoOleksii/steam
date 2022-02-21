@@ -12,14 +12,21 @@ export class FilterBoxComponent implements OnInit {
     value: 2000,
     music: false,
     all: true,
-    adventure: false
+    indie: true,
+    adventure: true,
+    action: true,
+    radio: ''
   };
 
   @Output() onChanged = new EventEmitter<number>()
-  @Output() onChecked = new EventEmitter<boolean>()
+  @Output() onChecked = new EventEmitter<any>()
+  @Output() onCheckedIndie = new EventEmitter<boolean>()
+  @Output() onCheckedAction = new EventEmitter<boolean>()
+  @Output() onCheckedAdventure = new EventEmitter<boolean>()
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
   showPrice() {
@@ -32,10 +39,23 @@ export class FilterBoxComponent implements OnInit {
 
   increase(price: number) {
     this.onChanged.emit(price)
+    // console.log(this.price)
   }
 
-  info(music: boolean) {
-    // console.log(music)
-    this.onChecked.emit(music)
+  info(price: any) {
+    console.log(price)
+    this.onChecked.emit(price)
+  }
+
+  infoIndie(indie: boolean) {
+    this.onCheckedIndie.emit(indie)
+  }
+
+  infoAction(action: boolean) {
+    this.onCheckedAction.emit(action)
+  }
+
+  infoAdventure(adventure: boolean) {
+    this.onCheckedAdventure.emit(adventure)
   }
 }

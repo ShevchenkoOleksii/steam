@@ -5,7 +5,7 @@ import {GameCard} from "../../../shared/interfaces";
   name: 'searchGames'
 })
 
-export class SearchGames implements PipeTransform{
+export class SearchGamesPipe implements PipeTransform{
   transform(games: GameCard[], search = ''): GameCard[] {
     if(!search.trim()) {
       return games

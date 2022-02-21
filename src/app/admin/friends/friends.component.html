@@ -1,8 +1,17 @@
 <div class="container">
-  <div class="search-item">
-    <label for="search">Search</label>
-    <input type="text" placeholder="Search" id="search" [(ngModel)]="searchFriends">
-  </div>
+  <form [formGroup]="searchForm" (ngSubmit)="searchSubmit()">
+    <h2>Friends</h2>
+    <div class="search-item">
+      <label for="search">Search Friends</label>
+      <input type="text" placeholder="Search Friends" id="search" formControlName="searchFriends">
+    </div>
+    <div>
+      <button
+        [disabled]="searchForm.invalid"
+        type="submit"
+      >Search</button>
+    </div>
+  </form>
 
   <form [formGroup]="friendForm" (ngSubmit)="submit()">
     <h2>Add Friend</h2>
@@ -10,12 +19,10 @@
       <div class="nickname">
         <label for="nickname">Nickname</label>
         <input type="text" id="nickname" placeholder="Nickname" formControlName="nickname">
-        <!--      <small *ngIf="friendForm.get('nickname')!.errors!['required']">-->
-        <!--        Enter Nickname!-->
-        <!--      </small>-->
       </div>
       <div>
         <button
+
           [disabled]="friendForm.invalid"
           type="submit"
         >Add Friend</button>
@@ -23,33 +30,62 @@
     </div>
   </form>
 
-  <div class="friends">
-    <h2 class="friends-heading">My Friends</h2>
-    <div *ngIf="friends.length; else loading" class="friends-list">
-      <div *ngFor="let friend of friends | searchFriends:searchFriends; let idx = index" class="friend-item">
+  <div
+    *ngIf="searchStatus"
+    class="friends">
+    <h2 class="friends-heading">Search Friends: {{searchFriends}}</h2>
+    <div class="friends-list">
+      <div *ngFor="let friend of searchResult; let idx = index" class="friend-item">
         <p class="nickname">{{idx + 1}} {{friend.nickname}}</p>
 
         <div class="btn-item">
-          <button class="btn-like" (click)="like('friend.id')">Like!</button>
-          <button class="btn-remove" (click)="remove(friend.id)">Remove</button>
+          <button
+
+            class="btn-like"
+            (click)="addFriend(friend)
+
+"
+          >
+            Add Friend</button>
+<!--          <button-->
+<!--            *ngIf="friend.added"-->
+<!--            class="btn-remove"-->
+<!--            (click)="remove(friend)"-->
+<!--          >-->
+<!--            Remove</button>-->
         </div>
 
       </div>
     </div>
   </div>
 
+  <div class="friends">
+    <h2 class="friends-heading">My Friends</h2>
+    <div *ngIf="friends.length; else loading" class="friends-list">
+
+      <div *ngFor="let friend of friends; let idx = index" class="friend-item">
+        <p class="nickname">{{idx + 1}} {{friend.nickname}}</p>
+
+        <div class="btn-item">
+          <button class="btn-like" (click)="like('friend.id')">Like!</button>
+          <button class="btn-remove" (click)="remove(friend)">Remove</button>
+        </div>
+
+      </div>
+    </div>
+<!--    <div *ngIf="friends[0].id === 404">-->
+<!--      <p>Error!</p>-->
+<!--    </div>-->
+  </div>
+
   <ng-template #loading>
+<!--    <div *ngIf="friends[0].id === 404">-->
+<!--      <p>Error!</p>-->
+<!--    </div>-->
     <p>Loading...</p>
   </ng-template>
+<!--  <ng-template #empty>-->
+<!--    <p>empty...</p>-->
+<!--  </ng-template>-->
 </div>
-<!--<form >-->
-<!--  <h1>Friends</h1>-->
-<!--  <div>-->
-<!--    <label for="search">Search Friends</label>-->
-<!--    <input type="text" id="search" placeholder="Search Friends">-->
-<!--  </div>-->
-<!--  <div>-->
-<!--    <button>Search</button>-->
-<!--  </div>-->
-<!--  -->
-<!--</form>-->
+

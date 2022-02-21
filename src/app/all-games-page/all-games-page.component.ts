@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Observable} from "rxjs";
 import {GameCard} from "../shared/interfaces";
 import {ActivatedRoute, Params} from "@angular/router";
-import {GameService} from "../shared/components/game.service";
+import {GameService} from "../shared/game.service";
 import {switchMap} from "rxjs/operators";
 
 @Component({

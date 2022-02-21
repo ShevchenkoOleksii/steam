@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Friend} from "../../shared/interfaces";
 import {FriendsService} from "../../shared/friends.service";
 import {Subscription} from "rxjs";
+import {UsersService} from "../../shared/users.service";
 
 
 @Component({
@@ -13,22 +14,51 @@ import {Subscription} from "rxjs";
 export class FriendsComponent implements OnInit, OnDestroy {
 
   friendForm: FormGroup = new FormGroup({})
+  searchForm: FormGroup = new FormGroup({})
   friends: Friend[] = []
+  searchResult: Friend[] = []
   sub: Subscription = new Subscription
-  searchFriends: string = ''
+  searchFriends: any = ''
   delSub: Subscription = new Subscription
   updateSub: Subscription = new Subscription
+  searchStatus: boolean = false
+  tempValue: Friend = {
+    nickname: '',
+    added: false
+  }
 
-  constructor(private friendsService: FriendsService) { }
+  errorMessage = {
+    text: 'No Users',
+    status: true
+  }
+
+
+  constructor(
+    private friendsService: FriendsService,
+    private usersService: UsersService
+  ) { }
 
   ngOnInit(): void {
+    this.searchForm = new FormGroup({
+      searchFriends: new FormControl(null, [Validators.required])
+    })
+
     this.friendForm = new FormGroup({
       nickname: new FormControl(null, [Validators.required])
     })
 
     this.sub = this.friendsService.getAllFriends().subscribe(friends => {
+      // if(friends[0].id === '404') {
+      //   this.errorMessage.status = true
+      // }
+      // if(true) {
+      //   this.errorMessage.status = true
+      //   return
+      // }
       this.friends = friends
     })
+
+    this.searchStatus = false
   }
 
   submit() {
@@ -37,11 +67,12 @@ export class FriendsComponent implements OnInit, OnDestroy {
     }
 
     const friend: Friend = {
-      nickname: this.friendForm.value.nickname
+      nickname: this.friendForm.value.nickname,
+      added: true
     }
 
     this.friendsService.addFriend(friend).subscribe(() => {
-       this.friendForm.reset()
+       // this.friendForm.reset()
 
       //logic
       this.updateSub = this.friendsService.getAllFriends().subscribe(friends => {
@@ -51,11 +82,6 @@ export class FriendsComponent implements OnInit, OnDestroy {
 
       console.log('reset form')
     })
-
-
-
-
-
   }
 
   ngOnDestroy(): void {
@@ -77,10 +103,52 @@ export class FriendsComponent implements OnInit, OnDestroy {
 
   }
 
-  remove(id: string) {
-    this.delSub = this.friendsService.remove(id).subscribe(() => {
-      this.friends = this.friends.filter((friend => friend.id !== id))
+  remove(friend: Friend) {
+    console.log(friend)
+    this.friendsService.remove(friend).subscribe(() => {
+      // this.tempValue = {
+      //   ...friend,
+      //   added: false
+      // }
+
+      // this.usersService.editUser({
+      //   ...friend,
+      //   added: false
+      // }).subscribe((value) => {
+      //   // this.friendsService.getAllFriends().subscribe(friends => {
+      //     // this.friends = friends.filter((item => !item.added))
+      //     console.log(value)
+      //
+      //     // this.friends = this.friends.filter((item => item.id !== value.id))
+      //   // }
+      // })
+
+
+      // this.usersService.editUser(this.tempValue).subscribe(() => {
+      //   this.updateSub = this.friendsService.getAllFriends().subscribe(friends => {
+      //     // this.friends = friends
+      //     // this.friends = this.friends.filter((item => item.id !== friend.id))
+      //   })
+      // })
+
+
+      // this.searchSubmit()
+      // this.friends = this.friends.filter((item => item.added))
+
+
+      this.friends = this.friends.filter((item => item.id !== friend.id))
     })
+    // this.usersService.editUser({
+    //   ...friend,
+    //   added: false
+    // }).subscribe((value) => {
+    //   // this.friendsService.getAllFriends().subscribe(friends => {
+    //   // this.friends = friends.filter((item => !item.added))
+    //   console.log(value)
+    //
+    //   // this.friends = this.friends.filter((item => item.id !== value.id))
+    //   // }
+    // })
   }
 
   // ngOnChanges(changes: SimpleChanges): void {
@@ -90,4 +158,60 @@ export class FriendsComponent implements OnInit, OnDestroy {
   //     console.log('updateSub.unsubscribe')
   //   }
   // }
+  addFriend(friend: Friend) {
+    this.friendsService.addFriend(friend).subscribe(() => {
+
+      this.tempValue = {
+        ...friend,
+        added: true
+      }
+
+      this.usersService.editUser({
+        ...friend,
+        added: true
+      }).subscribe(() => {
+        this.updateSub = this.friendsService.getAllFriends().subscribe(friends => {
+          this.friends = friends
+        })
+      })
+
+
+
+      // this.updateSub = this.friendsService.getAllFriends().subscribe(friends => {
+      //   this.friends = friends
+      //   console.log(this.friends)
+      // })
+
+    })
+  }
+
+  searchSubmit() {
+    this.searchStatus = true
+
+    const searchFriend = {
+      nickname: this.searchForm.value.searchFriends
+    }
+
+    this.usersService.getUsers().subscribe(users => {
+      // if(users[0].id === '404') {
+      //   this.errorMessage.status = true
+      // }
+
+      this.searchResult = users.filter(user => {
+        return user.nickname.toLowerCase().includes(searchFriend.nickname.toLowerCase())
+      })
+    })
+
+    // this.friendsService.addFriend(searchFriend).subscribe(() => {
+    //   this.friendForm.reset()
+    //
+    //   //logic
+    //   this.updateSub = this.friendsService.getAllFriends().subscribe(friends => {
+    //     this.friends = friends
+    //   })
+    //   //logic
+    //
+    //   console.log('reset form')
+    // })
+  }
 }

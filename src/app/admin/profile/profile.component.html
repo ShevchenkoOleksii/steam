@@ -1,1 +1,35 @@
-<p>profile works!</p>
+<div class="container">
+  <form
+    [formGroup]="profileForm"
+    (ngSubmit)="submitProfileForm()"
+    class="card"
+  >
+    <h2>Profile</h2>
+
+    <div class="form-control"
+    >
+      <label for="username">Username:</label>
+      <input id="username" type="text" placeholder="Username" formControlName="username">
+
+    </div>
+
+    <div class="form-control"
+    >
+      <label for="email">Email:</label>
+      <input id="email" type="email" value="email@test.com" formControlName="email" readonly>
+
+    </div>
+
+    <div class="form-control"
+    >
+      <label for="age">Age:</label>
+      <input id="age" type="number" placeholder="Age" formControlName="age" min="1">
+
+    </div>
+
+    <button
+      type="submit"
+    >Save</button>
+  </form>
+</div>
+

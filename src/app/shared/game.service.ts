@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {FirebaseCreateResponse, GameCard} from "../interfaces";
+import {FirebaseCreateResponse, GameCard} from "./interfaces";
 import {Observable} from "rxjs";
-import {environment} from "../../../environments/environment";
+import {environment} from "../../environments/environment";
 import {map, tap} from "rxjs/operators";
 
 @Injectable({
@@ -12,6 +12,7 @@ import {map, tap} from "rxjs/operators";
 export class GameService {
   gamesData: GameCard[] = [
     {
+      genre: 'indie',
       added: false,
       music: false,
       gameId: 11,
@@ -21,6 +22,7 @@ export class GameService {
       description: 'The Grand Theft Auto V: Premium Edition includes the complete Grand Theft Auto V story experience, free access to the ever evolving Grand Theft Auto Online and all existing gameplay upgrades and content including The Cayo Perico Heist, The Diamond Casino & Resort, The Diamond Casino Heist, Gunrunning and much more. You’ll also get the Criminal Enterprise Starter Pack, the fastest way to jumpstart your criminal empire in Grand Theft Auto Online.'
     },
     {
+      genre: 'indie',
       added: false,
       music: true,
       gameId: 22,
@@ -30,6 +32,7 @@ export class GameService {
       description: 'The Grand Theft Auto V: Premium Edition includes the complete Grand Theft Auto V story experience, free access to the ever evolving Grand Theft Auto Online and all existing gameplay upgrades and content including The Cayo Perico Heist, The Diamond Casino & Resort, The Diamond Casino Heist, Gunrunning and much more. You’ll also get the Criminal Enterprise Starter Pack, the fastest way to jumpstart your criminal empire in Grand Theft Auto Online.'
     },
     {
+      genre: 'action',
       added: false,
       music: true,
       gameId: 322,
@@ -39,6 +42,7 @@ export class GameService {
       description: 'The Grand Theft Auto V: Premium Edition includes the complete Grand Theft Auto V story experience, free access to the ever evolving Grand Theft Auto Online and all existing gameplay upgrades and content including The Cayo Perico Heist, The Diamond Casino & Resort, The Diamond Casino Heist, Gunrunning and much more. You’ll also get the Criminal Enterprise Starter Pack, the fastest way to jumpstart your criminal empire in Grand Theft Auto Online.'
     },
     {
+      genre: 'action',
       added: false,
       music: false,
       gameId: 342,
@@ -46,7 +50,9 @@ export class GameService {
       id: 76,
       price: 1400,
       description: 'The Grand Theft Auto V: Premium Edition includes the complete Grand Theft Auto V story experience, free access to the ever evolving Grand Theft Auto Online and all existing gameplay upgrades and content including The Cayo Perico Heist, The Diamond Casino & Resort, The Diamond Casino Heist, Gunrunning and much more. You’ll also get the Criminal Enterprise Starter Pack, the fastest way to jumpstart your criminal empire in Grand Theft Auto Online.'
-    },    {
+    },
+    {
+      genre: 'action',
       added: false,
       music: false,
       gameId: 131,
@@ -56,6 +62,7 @@ export class GameService {
       description: 'The Grand Theft Auto V: Premium Edition includes the complete Grand Theft Auto V story experience, free access to the ever evolving Grand Theft Auto Online and all existing gameplay upgrades and content including The Cayo Perico Heist, The Diamond Casino & Resort, The Diamond Casino Heist, Gunrunning and much more. You’ll also get the Criminal Enterprise Starter Pack, the fastest way to jumpstart your criminal empire in Grand Theft Auto Online.'
     },
     {
+      genre: 'action',
       added: false,
       music: true,
       gameId: 2422,
@@ -65,6 +72,7 @@ export class GameService {
       description: 'The Grand Theft Auto V: Premium Edition includes the complete Grand Theft Auto V story experience, free access to the ever evolving Grand Theft Auto Online and all existing gameplay upgrades and content including The Cayo Perico Heist, The Diamond Casino & Resort, The Diamond Casino Heist, Gunrunning and much more. You’ll also get the Criminal Enterprise Starter Pack, the fastest way to jumpstart your criminal empire in Grand Theft Auto Online.'
     },
     {
+      genre: 'adventure',
       added: false,
       music: true,
       gameId: 322,
@@ -74,6 +82,7 @@ export class GameService {
       description: 'The Grand Theft Auto V: Premium Edition includes the complete Grand Theft Auto V story experience, free access to the ever evolving Grand Theft Auto Online and all existing gameplay upgrades and content including The Cayo Perico Heist, The Diamond Casino & Resort, The Diamond Casino Heist, Gunrunning and much more. You’ll also get the Criminal Enterprise Starter Pack, the fastest way to jumpstart your criminal empire in Grand Theft Auto Online.'
     },
     {
+      genre: 'adventure',
       added: false,
       music: false,
       gameId: 3542,
@@ -193,8 +202,9 @@ export class GameService {
       }))
   }
 
-  removeGame(id: string): Observable<void> {
-    return this.http.delete<void>(`${environment.firebaseDatabaseURL}games/${id}.json`)
+  removeGame(gameCard: GameCard): Observable<void> {
+    gameCard.added = false
+    return this.http.delete<void>(`${environment.firebaseDatabaseURL}games/${gameCard.id}.json`)
   }
 
   // getById(id: string): Observable<GameCard> {

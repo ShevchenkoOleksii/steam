@@ -1,19 +1,40 @@
-<div class="container">
-  <app-filter-box
-    (onChanged)="onChanged($event)"
-    (onChecked)="onChecked($event)"
-  ></app-filter-box>
-  <div
-    *ngFor="let game of gamesData | filterByPrice: currentPriceFilter.price | filterByTag: currentPriceFilter.music"
-    class="game-card">
-    <div class="game-header">
-      <h2>{{game.title}}</h2>
-      <p>{{game.price}} UAH</p>
-    </div>
-    <div class="game-info">
-      <p>{{game.description}}</p>
-      <button type="submit" (click)="addGame(game)" [disabled]="game.added">Add To Library</button>
-      <button type="submit" (click)="remove(game.id)">Delete</button>
-    </div>
+<div class="main">
+  <div class="search-item">
+    <label for="search">Search</label>
+    <input type="text" placeholder="Search" id="search" [(ngModel)]="searchGames">
   </div>
+  <div class="content">
+    <div
+      class="container">
+
+      <div
+        *ngFor="let game of gamesData
+      | filterByPrice: currentPriceFilter.price
+      | filterByTag: currentPriceFilter.adventure: currentPriceFilter.action: currentPriceFilter.indie
+      | searchGames: searchGames
+"
+        class="game-card">
+
+        <div class="game-header">
+          <h2>{{game.title}}</h2>
+          <p>{{game.price}} UAH</p>
+        </div>
+        <div class="game-info">
+          <p>{{game.description}}</p>
+          <button type="submit" (click)="addGame(game)" [disabled]="game.added">Add To Library</button>
+          <!--      <button type="submit" (click)="remove(game.id)">Delete</button>-->
+        </div>
+      </div>
+
+    </div>
+
+    <app-filter-box
+      (onChanged)="onChanged($event)"
+      (onChecked)="onChecked($event)"
+      (onCheckedAction)="onCheckedAction($event)"
+      (onCheckedAdventure)="onCheckedAdventure($event)"
+      (onCheckedIndie)="onCheckedIndie($event)"
+    ></app-filter-box>
+  </div>
+
 </div>

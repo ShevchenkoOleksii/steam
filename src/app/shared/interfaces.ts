@@ -11,7 +11,8 @@ export interface FirebaseAuthResponse {
 
 export interface Friend {
   id?: string | any
-  nickname: string
+  nickname: string,
+  added: boolean
 }
 
 export interface FirebaseCreateResponse {
@@ -25,5 +26,12 @@ export interface GameCard {
   id?: string | any,
   added: boolean,
   gameId?: number,
-  music?: boolean
+  music?: boolean,
+  genre?: string
+}
+
+export interface UserProfile {
+  username: string,
+  age: number,
+  email: string
 }

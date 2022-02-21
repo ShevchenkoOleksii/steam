@@ -16,6 +16,7 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
+  align-items: center;
 }
 
 .nickname {
@@ -100,4 +101,8 @@ h2 {
   background-color: coral;
   color: white;
   border: none;
+}
+
+.btn-item button:disabled {
+  background-color: gray;
 }

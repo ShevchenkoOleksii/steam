@@ -21,7 +21,10 @@ ul {
 li.active a {
   color: white;
   font-weight: bold;
-  cursor: default;
+}
+
+li {
+  width: 100px;
 }
 
 a {

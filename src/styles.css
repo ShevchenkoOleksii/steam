@@ -14,3 +14,7 @@
   opacity: 0.9;
   margin-bottom: 1rem;
 }
+
+body {
+  background-color: rgba(128, 128, 128, 0.2);
+}

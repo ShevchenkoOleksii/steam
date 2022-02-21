@@ -1,28 +1,61 @@
-<div>
+<div class="filter-box">
+  <label for="price">Price</label>
   <input type="range" id="price" name="price"
          min="0" max="2000" step="100"
          [(ngModel)]="price.value"
          (input)="increase(price.value)"
   >
-  <label for="price">Price</label>
+  <p>{{price.value}}</p>
 </div>
 
-<div>
-  <input type="checkbox" id="music" name="interest" value="music"
-         [(ngModel)]="price.music"
-         (change)="info(price.music)"
-  >
-<!--  (change)="increase(price)"-->
-  <label for="music">Music</label>
+<div class="container-checkbox">
 
-<!--  <input type="radio" id="music2" name="interest" value="music2"-->
+<!--  <input type="checkbox" id="music" name="interest"-->
+<!--         [(ngModel)]="price.music"-->
 <!--  >-->
-  <!--  (change)="increase(price)"-->
+<!--  <label for="indie">Music</label>-->
+
+  <input type="checkbox" id="indie" name="interest"
+         [(ngModel)]="price.indie"
+         (change)="infoIndie(price.indie)"
+  >
+  <label for="music">Indie</label>
+
+
+
+
+<!--  (change)="increase(price)"-->
+
+
+<!--  <input type="radio" id="music2" name="interest" value="all"-->
+<!--         [(ngModel)]="price.radio"-->
+<!--  >-->
 <!--  <label for="music2">Music2</label>-->
+<!--  <input type="radio" id="music3" name="interest" value="adventure"-->
+<!--         [(ngModel)]="price.radio"-->
+<!--  >-->
+<!--  <label for="music2">Music3</label>-->
+<!--  <input type="radio" id="music4" name="interest" value="music4"-->
+<!--         [(ngModel)]="price.radio"-->
+<!--  >-->
+<!--  <label for="music2">Music4</label>-->
+</div>
+<div class="container-checkbox">
+  <input type="checkbox" id="action" name="interest"
+         [(ngModel)]="price.action"
+         (change)="infoAction(price.action)"
+  >
+  <label for="music">Action</label>
 </div>
 
+<div class="container-checkbox">
+  <input type="checkbox" id="adventure" name="interest"
+         [(ngModel)]="price.adventure"
+         (change)="infoAdventure(price.adventure)"
+  >
+  <label for="music">Adventure</label>
+</div>
 
-<p>{{price.value}}</p>
-<button (click)="showPrice()">Show Current Price</button>
-<button (click)="increase(price.value)">price</button>
-<button (click)="info(price.music)">music</button>
+<!--<button (click)="showPrice()">Show Current Price</button>-->
+<!--<button (click)="increase(price.value)">price</button>-->
+<!--<button (click)="info(price.music)">music</button>-->

@@ -16,6 +16,8 @@ import {SearchFriendsPipe} from "./shared/pipes/search-friends.pipe";
 import { FilterBoxComponent } from './games/filter-box/filter-box.component';
 import {FilterByPricePipe} from "./shared/pipes/filter-by-price.pipe";
 import {FilterByTagPipe} from "./shared/pipes/filter-by-tag.pipe";
+import {SearchGamesPipe} from "./shared/pipes/search-games.pipe";
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   imports: [
@@ -56,6 +58,11 @@ import {FilterByTagPipe} from "./shared/pipes/filter-by-tag.pipe";
             path: 'profile',
             component: ProfileComponent,
             canActivate: [AuthGuard]
+          },
+          {
+            path: 'users',
+            component: UsersComponent,
+            canActivate: [AuthGuard]
           }
         ]
       }
@@ -74,7 +81,9 @@ import {FilterByTagPipe} from "./shared/pipes/filter-by-tag.pipe";
     SearchFriendsPipe,
     FilterBoxComponent,
     FilterByPricePipe,
-    FilterByTagPipe
+    FilterByTagPipe,
+    SearchGamesPipe,
+    UsersComponent
   ],
   providers: [
     AuthGuard

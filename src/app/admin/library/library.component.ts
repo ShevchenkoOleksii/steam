@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {GameService} from "../../shared/components/game.service";
+import {GameService} from "../../shared/game.service";
 import {GameCard} from "../../shared/interfaces";
 
 @Component({
@@ -10,6 +10,7 @@ import {GameCard} from "../../shared/interfaces";
 export class LibraryComponent implements OnInit {
 
   libraryGames: GameCard[] = []
+  searchGames = ''
 
   constructor(private gameService: GameService) { }
 
@@ -21,9 +22,10 @@ export class LibraryComponent implements OnInit {
 
   }
 
-  remove(id: string) {
-    this.gameService.removeGame(id).subscribe(() => {
-      this.libraryGames = this.libraryGames.filter(game => game.id !== id)
+  remove(gameCard: GameCard) {
+    this.gameService.removeGame(gameCard).subscribe(() => {
+      this.libraryGames = this.libraryGames.filter(game => game.id !== gameCard.id)
+      // gameCard.added = false
     })
   }
 
