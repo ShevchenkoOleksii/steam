@@ -54,7 +54,7 @@
     <div *ngIf="friends.length; else loading" class="friends-list">
 
       <div *ngFor="let friend of friends; let idx = index" class="friend-item">
-        <p class="nickname">{{idx + 1}} {{friend.nickname}}</p>
+        <p class="nickname">{{idx + 1}}. {{friend.nickname}}</p>
 
         <div class="button-container">
           <div

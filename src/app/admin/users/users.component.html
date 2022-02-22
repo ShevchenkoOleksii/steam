@@ -1,26 +1,31 @@
-<div class="container">
+<div class="main-container">
+  <h1 class="main-heading">Users</h1>
   <div class="search-item">
     <label for="search">Search</label>
     <input type="text" placeholder="Search" id="search" [(ngModel)]="searchFriends">
   </div>
 
   <form [formGroup]="friendForm" (ngSubmit)="submit()">
-    <h2>Add User</h2>
-    <div class="form-control">
-      <div class="nickname">
+
+    <h2 class="friends-heading">Add User</h2>
+
+    <div class="friend-item add">
+
+      <div class="nickname-value">
         <label for="nickname">Nickname</label>
         <input type="text" id="nickname" placeholder="Nickname" formControlName="nickname">
-        <!--      <small *ngIf="friendForm.get('nickname')!.errors!['required']">-->
-        <!--        Enter Nickname!-->
-        <!--      </small>-->
       </div>
-      <div>
+
+      <div class="button-container">
         <button
           [disabled]="friendForm.invalid"
           type="submit"
+          class="button-add"
         >Add User</button>
       </div>
+
     </div>
+
   </form>
 
   <div class="friends">
@@ -29,9 +34,8 @@
       <div *ngFor="let user of users | searchFriends:searchFriends; let idx = index" class="friend-item">
         <p class="nickname">{{idx + 1}} {{user.nickname}}</p>
 
-        <div class="btn-item">
-<!--          <button class="btn-like" (click)="like('friend.id')">Like!</button>-->
-          <button class="btn-remove" (click)="remove(user)">Remove</button>
+        <div class="button-container">
+          <button class="button-remove" (click)="remove(user)">Remove</button>
         </div>
 
       </div>
@@ -39,6 +43,6 @@
   </div>
 
   <ng-template #loading>
-    <p>Loading...</p>
+    <p class="loading-content">Loading...</p>
   </ng-template>
 </div>
