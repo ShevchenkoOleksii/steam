@@ -29,4 +29,11 @@ export class LibraryComponent implements OnInit {
     })
   }
 
+  share(game: any) {
+
+  }
+
+  download(game: any) {
+
+  }
 }
