@@ -1,8 +1,8 @@
 <div
   *ngFor="let item of items"
-  class="card"
+  class="game-card"
 >
-  <div class="card-header">
+  <div class="card-heading">
     <h2 class="card-title">{{item.title}}</h2>
   </div>
   <div class="card-content">
@@ -12,6 +12,6 @@
   <button
     [routerLink]="['/game', item.id]"
     (click)="showInfo(item)"
-    class="button"
+    class="button-card"
   >Show Info</button>
 </div>

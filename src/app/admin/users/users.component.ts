@@ -37,19 +37,17 @@ export class UsersComponent implements OnInit {
 
     const user: Friend = {
       nickname: this.friendForm.value.nickname,
-      added: false
+      added: false,
+      friend: false
     }
 
     this.usersService.addUser(user).subscribe(() => {
       this.friendForm.reset()
 
-      //logic
       this.updateSub = this.usersService.getUsers().subscribe(users => {
         this.users = users
       })
-      //logic
 
-      console.log('reset form')
     })
 
 

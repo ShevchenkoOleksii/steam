@@ -1,3 +1,33 @@
+.icon-heart svg{
+  fill: red;
+  width: 20px;
+}
+
+.icon-heart-grey svg{
+  fill: grey;
+  width: 20px;
+}
+
+.button-search {
+  background-color: blueviolet;
+  padding: 8px 16px;
+  color: white;
+  border: none;
+  font-size: 24px;
+}
+
+.button-search:hover {
+  background-color: #a878dc;
+}
+
+.button-search:disabled {
+  background-color: grey;
+}
+
+.button-search:active {
+  background-color: #89084f;
+}
+
 .container {
   margin: 0 auto;
   width: 800px;

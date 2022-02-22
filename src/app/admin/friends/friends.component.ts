@@ -1,26 +1,20 @@
 import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Friend} from "../../shared/interfaces";
-import {FriendsService} from "../../shared/friends.service";
-import {Subscription} from "rxjs";
 import {UsersService} from "../../shared/users.service";
-
 
 @Component({
   selector: 'app-friends',
   templateUrl: './friends.component.html',
   styleUrls: ['./friends.component.css']
 })
-export class FriendsComponent implements OnInit, OnDestroy {
 
-  friendForm: FormGroup = new FormGroup({})
+export class FriendsComponent implements OnInit {
+
   searchForm: FormGroup = new FormGroup({})
   friends: Friend[] = []
   searchResult: Friend[] = []
-  sub: Subscription = new Subscription
   searchFriends: any = ''
-  delSub: Subscription = new Subscription
-  updateSub: Subscription = new Subscription
   searchStatus: boolean = false
   tempValue: Friend = {
     nickname: '',
@@ -32,9 +26,9 @@ export class FriendsComponent implements OnInit, OnDestroy {
     status: true
   }
 
+  searchFriendValue = ''
 
   constructor(
-    private friendsService: FriendsService,
     private usersService: UsersService
   ) { }
 
@@ -43,175 +37,97 @@ export class FriendsComponent implements OnInit, OnDestroy {
       searchFriends: new FormControl(null, [Validators.required])
     })
 
-    this.friendForm = new FormGroup({
-      nickname: new FormControl(null, [Validators.required])
-    })
+    this.usersService.getUsers().subscribe(users => {
 
-    this.sub = this.friendsService.getAllFriends().subscribe(friends => {
-      // if(friends[0].id === '404') {
-      //   this.errorMessage.status = true
-      // }
-      // if(true) {
-      //   this.errorMessage.status = true
-      //   return
-      // }
-      this.friends = friends
+      this.friends = users.filter(user => user.friend)
     })
 
     this.searchStatus = false
   }
 
-  submit() {
-    if(this.friendForm.invalid) {
-      return
-    }
-
-    const friend: Friend = {
-      nickname: this.friendForm.value.nickname,
-      added: true
-    }
-
-    this.friendsService.addFriend(friend).subscribe(() => {
-       // this.friendForm.reset()
-
-      //logic
-      this.updateSub = this.friendsService.getAllFriends().subscribe(friends => {
-        this.friends = friends
-      })
-      //logic
-
-      console.log('reset form')
-    })
-  }
-
-  ngOnDestroy(): void {
-    if(this.sub) {
-      this.sub.unsubscribe()
-      // console.log('sub.unsubscribe')
-    }
-    if(this.delSub) {
-      this.delSub.unsubscribe()
-      // console.log('delSub.unsubscribe')
-    }
-    // if(this.updateSub) {
-    //   this.updateSub.unsubscribe()
-    //   console.log('updateSub.unsubscribe')
-    // }
-  }
-
-  like(id: string) {
-
-  }
-
   remove(friend: Friend) {
-    console.log(friend)
-    this.friendsService.remove(friend).subscribe(() => {
-      // this.tempValue = {
-      //   ...friend,
-      //   added: false
-      // }
 
-      // this.usersService.editUser({
-      //   ...friend,
-      //   added: false
-      // }).subscribe((value) => {
-      //   // this.friendsService.getAllFriends().subscribe(friends => {
-      //     // this.friends = friends.filter((item => !item.added))
-      //     console.log(value)
-      //
-      //     // this.friends = this.friends.filter((item => item.id !== value.id))
-      //   // }
-      // })
+    this.tempValue = {
+      ...friend,
+      added: false,
+      friend: false
+    }
 
+    this.usersService.editUser(this.tempValue).subscribe(() => {
 
-      // this.usersService.editUser(this.tempValue).subscribe(() => {
-      //   this.updateSub = this.friendsService.getAllFriends().subscribe(friends => {
-      //     // this.friends = friends
-      //     // this.friends = this.friends.filter((item => item.id !== friend.id))
-      //   })
-      // })
+      this.usersService.getUsers().subscribe(users => {
+        this.friends = users.filter(user => user.friend)
 
+        this.updateSearchResult(users)
 
-      // this.searchSubmit()
-      // this.friends = this.friends.filter((item => item.added))
-
-
-      this.friends = this.friends.filter((item => item.id !== friend.id))
-    })
-    // this.usersService.editUser({
-    //   ...friend,
-    //   added: false
-    // }).subscribe((value) => {
-    //   // this.friendsService.getAllFriends().subscribe(friends => {
-    //   // this.friends = friends.filter((item => !item.added))
-    //   console.log(value)
-    //
-    //   // this.friends = this.friends.filter((item => item.id !== value.id))
-    //   // }
-    // })
-  }
-
-  // ngOnChanges(changes: SimpleChanges): void {
-  //   console.log(changes)
-  //   if(this.updateSub) {
-  //     this.updateSub.unsubscribe()
-  //     console.log('updateSub.unsubscribe')
-  //   }
-  // }
-  addFriend(friend: Friend) {
-    this.friendsService.addFriend(friend).subscribe(() => {
-
-      this.tempValue = {
-        ...friend,
-        added: true
-      }
-
-      this.usersService.editUser({
-        ...friend,
-        added: true
-      }).subscribe(() => {
-        this.updateSub = this.friendsService.getAllFriends().subscribe(friends => {
-          this.friends = friends
-        })
       })
 
+    })
 
+  }
 
-      // this.updateSub = this.friendsService.getAllFriends().subscribe(friends => {
-      //   this.friends = friends
-      //   console.log(this.friends)
-      // })
+  addFriend(friend: Friend) {
+    this.tempValue = {
+      ...friend,
+      added: true,
+      friend: true
+    }
+
+    this.usersService.editUser(this.tempValue).subscribe(() => {
+
+      this.usersService.getUsers().subscribe(users => {
+        this.friends = users.filter(user => user.friend)
+
+        this.updateSearchResult(users)
+
+      })
 
     })
+
   }
 
   searchSubmit() {
     this.searchStatus = true
 
-    const searchFriend = {
-      nickname: this.searchForm.value.searchFriends
-    }
+    this.searchFriendValue = this.searchForm.value.searchFriends
 
     this.usersService.getUsers().subscribe(users => {
-      // if(users[0].id === '404') {
-      //   this.errorMessage.status = true
-      // }
 
-      this.searchResult = users.filter(user => {
-        return user.nickname.toLowerCase().includes(searchFriend.nickname.toLowerCase())
-      })
+      this.updateSearchResult(users)
     })
 
-    // this.friendsService.addFriend(searchFriend).subscribe(() => {
-    //   this.friendForm.reset()
-    //
-    //   //logic
-    //   this.updateSub = this.friendsService.getAllFriends().subscribe(friends => {
-    //     this.friends = friends
-    //   })
-    //   //logic
-    //
-    //   console.log('reset form')
-    // })
+  }
+
+  updateSearchResult(users: Friend[]) {
+    this.searchResult = users.filter(user => {
+      return user.nickname.toLowerCase().includes(this.searchFriendValue.toLowerCase())
+    })
+  }
+
+  likeFriend(friend: Friend) {
+    let likeValue = true
+
+    if(friend.like) {
+      likeValue = false
+    }
+
+    const newValue = {
+      ...friend,
+      like: likeValue
+    }
+
+    this.usersService.editUser(newValue).subscribe(() => {
+
+      this.usersService.getUsers().subscribe(users => {
+        this.friends = users.filter(user => user.friend)
+
+        // this.updateSearchResult(users)
+
+      })
+
+    })
+
   }
 }
+
+

@@ -12,7 +12,9 @@ export interface FirebaseAuthResponse {
 export interface Friend {
   id?: string | any
   nickname: string,
-  added: boolean
+  added: boolean,
+  friend?: boolean,
+  like?: boolean
 }
 
 export interface FirebaseCreateResponse {

@@ -8,55 +8,42 @@
     <div>
       <button
         [disabled]="searchForm.invalid"
+        class="button-search"
         type="submit"
       >Search</button>
-    </div>
-  </form>
-
-  <form [formGroup]="friendForm" (ngSubmit)="submit()">
-    <h2>Add Friend</h2>
-    <div class="form-control">
-      <div class="nickname">
-        <label for="nickname">Nickname</label>
-        <input type="text" id="nickname" placeholder="Nickname" formControlName="nickname">
-      </div>
-      <div>
-        <button
-
-          [disabled]="friendForm.invalid"
-          type="submit"
-        >Add Friend</button>
-      </div>
     </div>
   </form>
 
   <div
     *ngIf="searchStatus"
     class="friends">
-    <h2 class="friends-heading">Search Friends: {{searchFriends}}</h2>
-    <div class="friends-list">
+    <h2 class="friends-heading">Search Friends: {{searchFriendValue}}</h2>
+    <div class="friends-list"
+      *ngIf="searchResult.length; else empty"
+    >
       <div *ngFor="let friend of searchResult; let idx = index" class="friend-item">
         <p class="nickname">{{idx + 1}} {{friend.nickname}}</p>
 
         <div class="btn-item">
           <button
-
+            [disabled]="friend.friend"
             class="btn-like"
-            (click)="addFriend(friend)
-
-"
+            (click)="addFriend(friend)"
           >
             Add Friend</button>
-<!--          <button-->
-<!--            *ngIf="friend.added"-->
-<!--            class="btn-remove"-->
-<!--            (click)="remove(friend)"-->
-<!--          >-->
-<!--            Remove</button>-->
+          <button
+            [disabled]="!friend.friend"
+            class="btn-remove"
+            (click)="remove(friend)"
+          >
+            Remove</button>
         </div>
 
       </div>
     </div>
+    <ng-template #empty>
+      Result: {{searchResult.length}}
+    </ng-template>
   </div>
 
   <div class="friends">
@@ -67,7 +54,13 @@
         <p class="nickname">{{idx + 1}} {{friend.nickname}}</p>
 
         <div class="btn-item">
-          <button class="btn-like" (click)="like('friend.id')">Like!</button>
+          <div
+          [ngClass]="{'icon-heart': !friend.like, 'icon-heart-grey': friend.like}"
+          (click)="likeFriend(friend)"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) --><path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"/></svg>
+          </div>
+          <button class="btn-remove" (click)="likeFriend(friend)">Like</button>
           <button class="btn-remove" (click)="remove(friend)">Remove</button>
         </div>
 

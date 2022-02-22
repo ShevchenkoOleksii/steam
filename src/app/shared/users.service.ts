@@ -19,8 +19,7 @@ export class UsersService {
       .pipe(map((response: FirebaseCreateResponse) => {
         return {
           ...user,
-          id: response.name,
-          added: false
+          id: response.name
         }
       }))
   }
@@ -34,7 +33,8 @@ export class UsersService {
             {
               id: 0,
               added: false,
-              nickname: ''
+              nickname: '',
+              friend: false
             }
           ]
         }
@@ -48,7 +48,6 @@ export class UsersService {
   }
 
   remove(id: string): Observable<void> {
-    console.log('remove user', id)
     return this.http.delete<void>(`${environment.firebaseDatabaseURL}users/${id}.json`)
   }
 
@@ -70,7 +69,6 @@ export class UsersService {
   }
 
   editUser(user: Friend): Observable<Friend> {
-    console.log(user)
     return this.http.patch<Friend | any>(`${environment.firebaseDatabaseURL}users/${user.id}.json`, user)
       .pipe(map((response: FirebaseCreateResponse) => {
         return {

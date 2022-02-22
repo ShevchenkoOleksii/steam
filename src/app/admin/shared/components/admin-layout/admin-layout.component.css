@@ -1,9 +1,26 @@
-.navbar {
+.logo {
+  width: 56px;
+  height: 56px;
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
-  height: 70px;
-  background-color: dodgerblue;
+}
+
+.logo a{
+  width: 56px;
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo svg {
+  width: 40px;
+  fill: #6c69ff;
+}
+
+.logo svg:hover {
+  fill: #3c39ee;
 }
 
 .box {
@@ -16,21 +33,26 @@ ul {
   display: flex;
   list-style-type: none;
   justify-content: flex-start;
+  align-items: center;
+}
+
+a:hover {
+  color: #716fcd;
 }
 
 li.active a {
-  color: white;
-  font-weight: bold;
+  color: #6c69ff;
 }
 
 li {
-  width: 100px;
+  display: flex;
+  justify-content: center;
 }
 
 a {
-  color: #fff;
-  padding: 0.45rem;
-  margin: 0 0.25rem;
+  display: block;
   text-decoration: none;
   font-size: 20px;
+  color: black;
+  margin-right: 20px;
 }

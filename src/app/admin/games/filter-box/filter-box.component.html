@@ -1,61 +1,43 @@
-<div class="filter-box">
-  <label for="price">Price</label>
-  <input type="range" id="price" name="price"
-         min="0" max="2000" step="100"
-         [(ngModel)]="price.value"
-         (input)="increase(price.value)"
-  >
-  <p>{{price.value}}</p>
+<div class="main-container">
+  <h3 class="filter-heading">Filter by price</h3>
+  <div class="filter-box">
+<!--    <label for="price">Price</label>-->
+    <input type="range" id="price" name="price"
+           min="0" max="2000" step="10"
+           [(ngModel)]="price.value"
+           (input)="increase(price.value)"
+    >
+    <p>{{price.value}}</p>
+  </div>
+  <h3 class="filter-heading">Filter by tag</h3>
+  <div class="container-checkbox">
+
+    <input type="checkbox" id="indie" name="interest"
+           [(ngModel)]="price.indie"
+           (change)="infoIndie(price.indie)"
+           class="toggle"
+    >
+    <label for="indie">Indie</label>
+
+  </div>
+
+  <div class="container-checkbox">
+    <input type="checkbox" id="action" name="interest"
+           [(ngModel)]="price.action"
+           (change)="infoAction(price.action)"
+           class="toggle"
+    >
+    <label for="action">Action</label>
+  </div>
+
+  <div class="container-checkbox">
+    <input type="checkbox" id="adventure" name="interest"
+           [(ngModel)]="price.adventure"
+           (change)="infoAdventure(price.adventure)"
+           class="toggle"
+    >
+    <label for="adventure">Adventure</label>
+  </div>
+
+
 </div>
-
-<div class="container-checkbox">
-
-<!--  <input type="checkbox" id="music" name="interest"-->
-<!--         [(ngModel)]="price.music"-->
-<!--  >-->
-<!--  <label for="indie">Music</label>-->
-
-  <input type="checkbox" id="indie" name="interest"
-         [(ngModel)]="price.indie"
-         (change)="infoIndie(price.indie)"
-  >
-  <label for="music">Indie</label>
-
-
-
-
-<!--  (change)="increase(price)"-->
-
-
-<!--  <input type="radio" id="music2" name="interest" value="all"-->
-<!--         [(ngModel)]="price.radio"-->
-<!--  >-->
-<!--  <label for="music2">Music2</label>-->
-<!--  <input type="radio" id="music3" name="interest" value="adventure"-->
-<!--         [(ngModel)]="price.radio"-->
-<!--  >-->
-<!--  <label for="music2">Music3</label>-->
-<!--  <input type="radio" id="music4" name="interest" value="music4"-->
-<!--         [(ngModel)]="price.radio"-->
-<!--  >-->
-<!--  <label for="music2">Music4</label>-->
-</div>
-<div class="container-checkbox">
-  <input type="checkbox" id="action" name="interest"
-         [(ngModel)]="price.action"
-         (change)="infoAction(price.action)"
-  >
-  <label for="music">Action</label>
-</div>
-
-<div class="container-checkbox">
-  <input type="checkbox" id="adventure" name="interest"
-         [(ngModel)]="price.adventure"
-         (change)="infoAdventure(price.adventure)"
-  >
-  <label for="music">Adventure</label>
-</div>
-
-<!--<button (click)="showPrice()">Show Current Price</button>-->
-<!--<button (click)="increase(price.value)">price</button>-->
-<!--<button (click)="info(price.music)">music</button>-->
