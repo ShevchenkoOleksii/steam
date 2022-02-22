@@ -1,0 +1,32 @@
+.alert-wrap {
+  height: 60px;
+  font-size: 22px;
+  position: fixed;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 208, 0, 0.75);
+  color: #005300;
+  border: 1px solid #005300;
+  padding: 8px;
+}
+
+.alert-wrap p {
+  text-align: justify;
+}
+
+.alert-success {
+
+}
+
+.alert-warning {
+
+}
+
+.alert-danger {
+
+}

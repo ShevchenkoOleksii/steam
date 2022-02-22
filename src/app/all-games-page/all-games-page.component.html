@@ -3,16 +3,18 @@
   class="container"
 >
   <div class="game-header">
-    <h1>{{game.title}}</h1>
+    <h1 class="game-heading">{{game.title}}</h1>
     <button
       routerLink="/"
+      class="button-home"
     >Home</button>
   </div>
   <div class="game-info">
-    <p>{{game.description}}</p>
+    <p class="text-content">{{game.description}}</p>
   </div>
 </div>
 
 <ng-template #loading>
-  <p>loading...</p>
+  <p class="text-content">loading...</p>
 </ng-template>
+

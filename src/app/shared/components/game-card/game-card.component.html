@@ -1,17 +1,19 @@
-<div
-  *ngFor="let item of items"
-  class="game-card"
->
-  <div class="card-heading">
-    <h2 class="card-title">{{item.title}}</h2>
+<div class="container">
+  <div
+    *ngFor="let item of items"
+    class="game-card"
+  >
+    <div class="card-heading">
+      <h2 class="card-title">{{item.title}}</h2>
+    </div>
+    <div class="card-content">
+      <p class="card-description">{{item.description}}</p>
+      <p class="card-price">Price: {{item.price}} UAH</p>
+    </div>
+    <button
+      [routerLink]="['/game', item.id]"
+      (click)="showInfo(item)"
+      class="button-card"
+    >Show Info</button>
   </div>
-  <div class="card-content">
-    <p class="card-description">{{item.description}}</p>
-    <p class="card-price">{{item.price}}</p>
-  </div>
-  <button
-    [routerLink]="['/game', item.id]"
-    (click)="showInfo(item)"
-    class="button-card"
-  >Show Info</button>
 </div>

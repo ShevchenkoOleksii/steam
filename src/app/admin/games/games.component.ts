@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {GameCard} from "../../shared/interfaces";
 import {GameService} from "../../shared/game.service";
 import {FilterBoxComponent} from "./filter-box/filter-box.component";
+import {AlertService} from "../shared/services/alert.service";
 
 @Component({
   selector: 'app-games',
@@ -114,6 +115,7 @@ export class GamesComponent implements OnInit {
 
   constructor(
     private gameService: GameService,
+    private alertService: AlertService
   ) { }
 
   ngOnInit(): void {
@@ -143,6 +145,7 @@ export class GamesComponent implements OnInit {
   addGame(game: GameCard) {
     this.gameService.addGame(game).subscribe(() => {
       // game.added = true
+      this.alertService.success(`You have added ${game.title} successfully!`)
     })
   }
 

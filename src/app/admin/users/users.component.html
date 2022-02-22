@@ -1,4 +1,6 @@
 <div class="main-container">
+  <app-alert></app-alert>
+
   <h1 class="main-heading">Users</h1>
   <div class="search-item">
     <label for="search">Search</label>
@@ -32,7 +34,7 @@
     <h2 class="friends-heading">All Users</h2>
     <div *ngIf="users.length; else loading" class="friends-list">
       <div *ngFor="let user of users | searchFriends:searchFriends; let idx = index" class="friend-item">
-        <p class="nickname">{{idx + 1}} {{user.nickname}}</p>
+        <p class="nickname">{{idx + 1}}. {{user.nickname}}</p>
 
         <div class="button-container">
           <button class="button-remove" (click)="remove(user)">Remove</button>

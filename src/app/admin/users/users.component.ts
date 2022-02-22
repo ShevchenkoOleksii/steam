@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Friend} from "../../shared/interfaces";
 import {Subscription} from "rxjs";
 import {UsersService} from "../../shared/users.service";
+import {AlertService} from "../shared/services/alert.service";
 
 @Component({
   selector: 'app-users',
@@ -18,7 +19,10 @@ export class UsersComponent implements OnInit {
   delSub: Subscription = new Subscription
   updateSub: Subscription = new Subscription
 
-  constructor(private usersService: UsersService) { }
+  constructor(
+    private usersService: UsersService,
+    private alertService: AlertService
+  ) { }
 
   ngOnInit(): void {
     this.friendForm = new FormGroup({
@@ -38,7 +42,8 @@ export class UsersComponent implements OnInit {
     const user: Friend = {
       nickname: this.friendForm.value.nickname,
       added: false,
-      friend: false
+      friend: false,
+      like: false
     }
 
     this.usersService.addUser(user).subscribe(() => {
@@ -48,6 +53,7 @@ export class UsersComponent implements OnInit {
         this.users = users
       })
 
+      this.alertService.success(`You have added ${user.nickname} successfully!`)
     })
 
 
@@ -71,14 +77,10 @@ export class UsersComponent implements OnInit {
     // }
   }
 
-  like(id: string) {
-
-  }
-
   remove(item: Friend) {
-    console.log(item)
     this.delSub = this.usersService.remove(item.id).subscribe(() => {
       this.users = this.users.filter((user => user.id !== item.id))
+      this.alertService.success(`You have removed ${item.nickname} successfully!`)
     })
   }
 }

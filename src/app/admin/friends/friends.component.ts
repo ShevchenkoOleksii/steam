@@ -2,6 +2,7 @@ import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/c
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Friend} from "../../shared/interfaces";
 import {UsersService} from "../../shared/users.service";
+import {AlertService} from "../shared/services/alert.service";
 
 @Component({
   selector: 'app-friends',
@@ -29,7 +30,8 @@ export class FriendsComponent implements OnInit {
   searchFriendValue = ''
 
   constructor(
-    private usersService: UsersService
+    private usersService: UsersService,
+    private alertService: AlertService
   ) { }
 
   ngOnInit(): void {
@@ -59,7 +61,7 @@ export class FriendsComponent implements OnInit {
         this.friends = users.filter(user => user.friend)
 
         this.updateSearchResult(users)
-
+        this.alertService.success(`You have removed ${friend.nickname} successfully!`)
       })
 
     })
@@ -79,7 +81,7 @@ export class FriendsComponent implements OnInit {
         this.friends = users.filter(user => user.friend)
 
         this.updateSearchResult(users)
-
+        this.alertService.success(`You have added ${friend.nickname} successfully!`)
       })
 
     })

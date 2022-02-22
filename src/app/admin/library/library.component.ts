@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {GameService} from "../../shared/game.service";
 import {GameCard} from "../../shared/interfaces";
+import {AlertService} from "../shared/services/alert.service";
 
 @Component({
   selector: 'app-library',
@@ -12,7 +13,10 @@ export class LibraryComponent implements OnInit {
   libraryGames: GameCard[] = []
   searchGames = ''
 
-  constructor(private gameService: GameService) { }
+  constructor(
+    private gameService: GameService,
+    private alertService: AlertService
+  ) { }
 
   ngOnInit(): void {
 
@@ -26,14 +30,15 @@ export class LibraryComponent implements OnInit {
     this.gameService.removeGame(gameCard).subscribe(() => {
       this.libraryGames = this.libraryGames.filter(game => game.id !== gameCard.id)
       // gameCard.added = false
+      this.alertService.success(`You have removed ${gameCard.title} successfully!`)
     })
   }
 
-  share(game: any) {
-
+  share(gameCard: GameCard) {
+    this.alertService.success(`You have shared ${gameCard.title} successfully!`)
   }
 
-  download(game: any) {
-
+  download(gameCard: GameCard) {
+    this.alertService.success(`You have downloaded ${gameCard.title} successfully!`)
   }
 }

@@ -18,6 +18,8 @@ import {FilterByPricePipe} from "./shared/pipes/filter-by-price.pipe";
 import {FilterByTagPipe} from "./shared/pipes/filter-by-tag.pipe";
 import {SearchGamesPipe} from "./shared/pipes/search-games.pipe";
 import { UsersComponent } from './users/users.component';
+import {AlertService} from "./shared/services/alert.service";
+import { AlertComponent } from './shared/components/alert/alert.component';
 
 @NgModule({
   imports: [
@@ -83,10 +85,12 @@ import { UsersComponent } from './users/users.component';
     FilterByPricePipe,
     FilterByTagPipe,
     SearchGamesPipe,
-    UsersComponent
+    UsersComponent,
+    AlertComponent
   ],
   providers: [
-    AuthGuard
+    AuthGuard,
+    AlertService
   ]
 })
 

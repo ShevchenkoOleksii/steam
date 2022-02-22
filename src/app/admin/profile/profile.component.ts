@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UsersService} from "../../shared/users.service";
 import {UserProfile} from "../../shared/interfaces";
+import {AlertService} from "../shared/services/alert.service";
 
 @Component({
   selector: 'app-profile',
@@ -19,7 +20,10 @@ export class ProfileComponent implements OnInit {
 
   profileForm: FormGroup = new FormGroup({})
 
-  constructor(private userService: UsersService) { }
+  constructor(
+    private userService: UsersService,
+    private alertService: AlertService
+  ) { }
 
   ngOnInit(): void {
     this.profileForm = new FormGroup({
@@ -60,7 +64,7 @@ export class ProfileComponent implements OnInit {
     }
 
     this.userService.editProfile(userProfile).subscribe(() => {
-
+      this.alertService.success(`You have saved the data successfully!`)
     })
   }
 }
