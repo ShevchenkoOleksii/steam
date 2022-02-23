@@ -36,7 +36,7 @@
         <small
           *ngIf="form.get('email')!.errors!['email']"
         >
-          Email is not correct
+          Sorry, only letters (a-z), numbers (0-9), and periods (.) are allowed.
         </small>
       </div>
 
@@ -54,14 +54,15 @@
         <small
           *ngIf="form.get('password')!.errors!['required']"
         >
-          Enter password
+          Use 8 or more characters with a mix of letters, numbers & symbols
         </small>
         <small
           *ngIf="form.get('password')!.errors!['minlength']"
         >
-          Password should be no less than
+          Use
           {{form.get('password')!.errors!['minlength']!.requiredLength}}
-          symbols, now it is
+          characters or more for your password.
+          Current length is
           {{form.get('password')!.errors!['minlength']!.actualLength}}
         </small>
       </div>
