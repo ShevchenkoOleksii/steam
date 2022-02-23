@@ -19,7 +19,6 @@ export class FriendsService {
          return {
            ...friend,
            id: response.name,
-           // added: true
          }
       }))
   }

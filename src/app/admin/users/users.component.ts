@@ -56,25 +56,15 @@ export class UsersComponent implements OnInit {
       this.alertService.success(`You have added ${user.nickname} successfully!`)
     })
 
-
-
-
-
   }
 
   ngOnDestroy(): void {
     if(this.sub) {
       this.sub.unsubscribe()
-      // console.log('sub.unsubscribe')
     }
     if(this.delSub) {
       this.delSub.unsubscribe()
-      // console.log('delSub.unsubscribe')
     }
-    // if(this.updateSub) {
-    //   this.updateSub.unsubscribe()
-    //   console.log('updateSub.unsubscribe')
-    // }
   }
 
   remove(item: Friend) {

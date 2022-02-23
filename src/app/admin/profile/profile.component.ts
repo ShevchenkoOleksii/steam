@@ -42,18 +42,7 @@ export class ProfileComponent implements OnInit {
         age: new FormControl(this.profileData.age, [Validators.required, Validators.maxLength(3)])
       })
     })
-    // console.log(this.profileData)
 
-    // this.profileForm = new FormGroup({
-    //   username: new FormControl(this.profileData.username, [Validators.required]),
-    //   email: new FormControl(this.profileData.email, [Validators.required]),
-    //   age: new FormControl(this.profileData.age, [Validators.required, Validators.maxLength(3)])
-    // })
-    // this.profileForm = new FormGroup({
-    //   username: new FormControl(null, [Validators.required]),
-    //   email: new FormControl(this.userEmail, [Validators.required]),
-    //   age: new FormControl(null, [Validators.required, Validators.maxLength(3)])
-    // })
   }
 
   submitProfileForm() {

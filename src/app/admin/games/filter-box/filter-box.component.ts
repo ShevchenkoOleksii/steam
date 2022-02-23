@@ -9,7 +9,7 @@ export class FilterBoxComponent implements OnInit {
 
 
   @Input() price = {
-    value: 2000,
+    value: 1000,
     music: false,
     all: true,
     indie: true,

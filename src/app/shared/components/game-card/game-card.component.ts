@@ -11,14 +11,11 @@ export class GameCardComponent implements OnInit {
 
   items: GameCard | any = []
 
-  constructor(private gameService: GameService) {
-    // this.items = gameService.gamesData
-  }
+  constructor(private gameService: GameService) {}
 
   ngOnInit(): void {
     this.items = this.gameService.gamesData
   }
-
 
   showInfo(item: GameCard) {
     this.gameService.getInfo(item)

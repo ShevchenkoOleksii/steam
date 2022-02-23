@@ -28,8 +28,9 @@ export class LibraryComponent implements OnInit {
 
   remove(gameCard: GameCard) {
     this.gameService.removeGame(gameCard).subscribe(() => {
+
       this.libraryGames = this.libraryGames.filter(game => game.id !== gameCard.id)
-      // gameCard.added = false
+
       this.alertService.success(`You have removed ${gameCard.title} successfully!`)
     })
   }

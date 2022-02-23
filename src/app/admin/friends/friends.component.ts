@@ -58,14 +58,14 @@ export class FriendsComponent implements OnInit {
     this.usersService.editUser(this.tempValue).subscribe(() => {
 
       this.usersService.getUsers().subscribe(users => {
+
         this.friends = users.filter(user => user.friend)
 
         this.updateSearchResult(users)
+
         this.alertService.success(`You have removed ${friend.nickname} successfully!`)
       })
-
     })
-
   }
 
   addFriend(friend: Friend) {
@@ -78,14 +78,14 @@ export class FriendsComponent implements OnInit {
     this.usersService.editUser(this.tempValue).subscribe(() => {
 
       this.usersService.getUsers().subscribe(users => {
+
         this.friends = users.filter(user => user.friend)
 
         this.updateSearchResult(users)
+
         this.alertService.success(`You have added ${friend.nickname} successfully!`)
       })
-
     })
-
   }
 
   searchSubmit() {
@@ -97,7 +97,6 @@ export class FriendsComponent implements OnInit {
 
       this.updateSearchResult(users)
     })
-
   }
 
   updateSearchResult(users: Friend[]) {
@@ -121,14 +120,10 @@ export class FriendsComponent implements OnInit {
     this.usersService.editUser(newValue).subscribe(() => {
 
       this.usersService.getUsers().subscribe(users => {
+
         this.friends = users.filter(user => user.friend)
-
-        // this.updateSearchResult(users)
-
       })
-
     })
-
   }
 }
 

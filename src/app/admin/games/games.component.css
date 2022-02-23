@@ -63,8 +63,7 @@
   height: 312px;
   border-radius: 4px;
   background-color: #ffffff;
-  /*box-shadow: 1px 1px 0 0 #bdbdbd, -1px -1px 0 0 #bdbdbd;*/
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 1px 1px 0 0 #bdbdbd, -1px -1px 0 0 #bdbdbd;
 }
 
 .game-header {
@@ -76,6 +75,15 @@
   align-items: center;
   justify-content: space-between;
   padding: 5px;
+  position: relative;
+}
+
+.game-genre {
+  position: absolute;
+  left: 5px;
+  bottom: 5px;
+  color: #0f19c1;
+  text-transform: capitalize;
 }
 
 .game-title {

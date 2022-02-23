@@ -35,7 +35,6 @@ export class AuthService {
   }
 
   logout() {
-    console.log('logout')
     this.setToken(null)
   }
 
@@ -45,7 +44,6 @@ export class AuthService {
 
   private handleError(error: HttpErrorResponse) {
     const {message} = error.error.error
-    console.log(message)
 
     switch (message) {
       case 'INVALID_EMAIL':
@@ -58,14 +56,12 @@ export class AuthService {
         this.error$.next('EMAIL NOT FOUND')
         break;
     }
-    // if(message) {
-    //
-    // }
+
     return throwError(error)
   }
 
   private setToken(response: FirebaseAuthResponse | null | any) {
-    // console.log(response)
+
     if (response) {
       const expDate = new Date(new Date().getTime() + +response.expiresIn * 1000)
 

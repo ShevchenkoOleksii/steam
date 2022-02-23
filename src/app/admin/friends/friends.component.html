@@ -9,13 +9,11 @@
       <input type="text" placeholder="Search Friends" id="search" formControlName="searchFriends">
     </div>
 
-
      <button
        [disabled]="searchForm.invalid"
        class="button-search"
        type="submit"
      >Search</button>
-
 
   </form>
 
@@ -74,7 +72,7 @@
   </div>
 
   <ng-template #loading>
-    <p class="loading-content">Loading...</p>
+    <p class="loading-content">List of Friends is empty!</p>
   </ng-template>
 
 </div>

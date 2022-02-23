@@ -181,3 +181,16 @@
   color: #7c7aff;
 }
 
+.empty-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fa7416;
+  color: white;
+  height: 100%;
+}
+
+.empty-box-text {
+  font-size: 24px;
+  text-align: center;
+}

@@ -1,15 +1,20 @@
 <div class="main-container">
+
   <h3 class="filter-heading">Filter by price</h3>
+
   <div class="filter-box">
-<!--    <label for="price">Price</label>-->
+
     <input type="range" id="price" name="price"
-           min="0" max="2000" step="10"
+           min="0" max="1000" step="5"
            [(ngModel)]="price.value"
            (input)="increase(price.value)"
     >
+
     <p>{{price.value}}</p>
   </div>
+
   <h3 class="filter-heading">Filter by tag</h3>
+
   <div class="container-checkbox">
 
     <input type="checkbox" id="indie" name="interest"
@@ -22,22 +27,24 @@
   </div>
 
   <div class="container-checkbox">
+
     <input type="checkbox" id="action" name="interest"
            [(ngModel)]="price.action"
            (change)="infoAction(price.action)"
            class="toggle"
     >
     <label for="action">Action</label>
+
   </div>
 
   <div class="container-checkbox">
+
     <input type="checkbox" id="adventure" name="interest"
            [(ngModel)]="price.adventure"
            (change)="infoAdventure(price.adventure)"
            class="toggle"
     >
     <label for="adventure">Adventure</label>
+
   </div>
-
-
 </div>

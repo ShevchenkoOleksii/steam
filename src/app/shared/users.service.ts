@@ -73,11 +73,7 @@ export class UsersService {
       .pipe(map((response: FirebaseCreateResponse) => {
         return {
           ...user,
-          // id: response.name,
-
-          // nickname: user.nickname,
           id: user.id,
-          // added: true
         }
       }))
   }

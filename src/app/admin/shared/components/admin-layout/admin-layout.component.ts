@@ -7,19 +7,15 @@ import {AuthService} from "../../services/auth.service";
   templateUrl: './admin-layout.component.html',
   styleUrls: ['./admin-layout.component.css']
 })
-export class AdminLayoutComponent implements OnInit {
+export class AdminLayoutComponent {
 
   constructor(
     private router: Router,
     public auth: AuthService
   ) { }
 
-  ngOnInit(): void {
-  }
-
   logout(event: Event) {
     event.stopPropagation()
-    console.log('logout')
     this.auth.logout()
     this.router.navigate(['/admin', 'login'])
   }

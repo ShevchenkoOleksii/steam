@@ -29,7 +29,8 @@ export interface GameCard {
   added: boolean,
   gameId?: number,
   music?: boolean,
-  genre?: string
+  genre?: string,
+  fullDescription?: string
 }
 
 export interface UserProfile {
